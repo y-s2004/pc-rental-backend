@@ -32,7 +32,7 @@ public class LoginApiController {
 
         MstUser user = userOptional.get();
 
-        if(user.getDeleteFlag() || user.getRetireDate() != null){
+        if(user.isDeleteFlag() || user.getRetireDate() != null){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("ログイン情報が存在しません");
         }
 

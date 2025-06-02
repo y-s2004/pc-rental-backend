@@ -31,6 +31,7 @@ public class MstUser {
     private String telNo;
 
     @Column(length = 50)
+    @JsonProperty("mail_address")
     private String mailAddress;
 
     private int age;
