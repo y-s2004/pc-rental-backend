@@ -21,20 +21,34 @@ public class LoginApiController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Map<String, String> loginData, HttpSession session) {
+        System.out.println("ログインリクエスト受信");
+
         String employeeNo = loginData.get("employee_no");
         String password = loginData.get("password");
+
+        System.out.println("入力された社員番号: " + employeeNo);
+        System.out.println("入力されたパスワード: " + password);
+
 
         Optional<MstUser> userOptional = mstUserService.findByEmployeeNo(employeeNo);
 
         if(userOptional.isEmpty()){
+            System.out.println("ユーザーが見つかりません");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("ログイン情報が存在しません");
         }
 
         MstUser user = userOptional.get();
+        System.out.println("該当ユーザーあり: " + user.getEmployeeNo());
+        System.out.println("DBのパスワード: [" + user.getPassword() + "]");
+        System.out.println("送信されたパスワード: [" + password + "]");
+
 
         if(user.isDeleteFlag() || user.getRetireDate() != null){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("ログイン情報が存在しません");
         }
+
+        System.out.println("DBのパスワード: [" + user.getPassword() + "]");
+        System.out.println("送信されたパスワード: [" + password + "]");
 
         if(!user.getPassword().equals(password)){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("ログイン情報が存在しません");

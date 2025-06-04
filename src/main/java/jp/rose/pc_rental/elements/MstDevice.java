@@ -33,7 +33,7 @@ public class MstDevice {
     @Column(nullable = false, length = 20)
     private String place;
 
-    @Column(nullable = false, length = 20)
+    @Column(length = 20)
     private String remarks;
 
     @Column(columnDefinition = "boolean default false")

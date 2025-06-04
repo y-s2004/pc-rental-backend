@@ -77,7 +77,7 @@ public class MstUserService {
     }
 
     public Optional<MstUser> findByEmployeeNo(String employeeNo) {
-        return mstUserRepository.findByEmployeeNo(employeeNo);
+        return mstUserRepository.findByEmployeeNoAndDeleteFlagFalse(employeeNo);
     }
 
 

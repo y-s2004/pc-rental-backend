@@ -1,6 +1,8 @@
 package jp.rose.pc_rental.services;
 
+import jp.rose.pc_rental.elements.MstDevice;
 import jp.rose.pc_rental.elements.TrnRental;
+import jp.rose.pc_rental.repositories.MstDeviceRepository;
 import jp.rose.pc_rental.repositories.TrnRentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,34 +15,40 @@ import java.util.Optional;
 public class TrnRentalService {
 
     private final TrnRentalRepository trnRentalRepository;
+    private final MstDeviceRepository mstDeviceRepository;
 
     @Autowired
-    public TrnRentalService(TrnRentalRepository trnRentalRepository) {
+    public TrnRentalService(TrnRentalRepository trnRentalRepository, MstDeviceRepository mstDeviceRepository) {
         this.trnRentalRepository = trnRentalRepository;
+        this.mstDeviceRepository = mstDeviceRepository;
     }
 
     public String rental(TrnRental trnRental) {
-        String assetNum = trnRental.getAssetNum();
 
-        if (trnRentalRepository.existsByAssetNumAndRentalStatus(assetNum, true)) {
+        if (trnRentalRepository.existsByAssetNumAndRentalStatus(trnRental.getAssetNum(), true)) {
             return "既に貸出中のPCです";
         }
 
-        if (trnRentalRepository.existsByAssetNumAndDeleteFlag(assetNum, true)) {
+        if (trnRentalRepository.existsByAssetNumAndDeleteFlag(trnRental.getAssetNum(), true)) {
             return "故障中で貸出できません";
         }
 
-        boolean exists = trnRentalRepository.findByAssetNum(assetNum).isPresent();
-        if (!exists) {
+        Optional<MstDevice> deviceOpt = mstDeviceRepository.findByAssetNum(trnRental.getAssetNum());
+        if (!deviceOpt.isPresent()) {
             return "そのようなPCは存在しません";
         }
 
+        MstDevice device = deviceOpt.get();
+
+        device.setDeleteFlag(true);
+        mstDeviceRepository.save(device);
+
         trnRental.setRentalsDate(LocalDateTime.now());
         trnRental.setRentalStatus(true);
+        trnRental.setDeleteFlag(false);
         trnRentalRepository.save(trnRental);
 
         return "貸出が完了しました";
-
     }
 
     public String returnRental(String assetNum) {

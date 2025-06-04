@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "TRN_RENTAL")
+@Table(name = "trn_rental")
 public class TrnRental {
 
     @Id
@@ -52,7 +52,7 @@ public class TrnRental {
 
     @Column(nullable = false, columnDefinition = "boolean default false")
     @JsonProperty("delete_flag")
-    private Boolean deleteFlag;
+    private Boolean deleteFlag = false;
 
 
 }
