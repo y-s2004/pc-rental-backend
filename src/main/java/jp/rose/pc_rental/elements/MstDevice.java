@@ -62,5 +62,11 @@ public class MstDevice {
     @JsonProperty("update_date")
     private LocalDateTime updateDate;
 
+    @Column(nullable = false)
+    @JsonProperty("rental_status")
+    private boolean rentalStatus;
+
+    @JsonProperty("inventory_date")
+    private LocalDateTime inventoryDate;
 
 }

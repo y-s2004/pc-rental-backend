@@ -25,7 +25,7 @@ public class TrnRental {
     @Column(nullable = false, length = 20)
     private String place;
 
-    @Column(nullable = false, columnDefinition = "boolean default true")
+    @Column(nullable = false, columnDefinition = "boolean default false")
     @JsonProperty("rental_status")
     private boolean rentalStatus;
 
@@ -43,9 +43,6 @@ public class TrnRental {
     @Column(nullable = false)
     @JsonProperty("return_date")
     private LocalDateTime returnDate;
-    
-    @JsonProperty("inventory_date")
-    private LocalDateTime inventoryDate;
 
     @Column(length = 40)
     private String remarks;

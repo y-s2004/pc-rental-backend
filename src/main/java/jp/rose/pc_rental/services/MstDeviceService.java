@@ -35,7 +35,13 @@ public class MstDeviceService {
                 .orElseThrow(() -> new IllegalArgumentException("User not found: "+ assetNum));
 
         target.setPlace(mstDevice.getPlace());
+        target.setOs(mstDevice.getOs());
+        target.setMaker(mstDevice.getMaker());
+        target.setMemory(mstDevice.getMemory());
+        target.setDiscCapacity(mstDevice.getDiscCapacity());
+        target.setGraphicBoard(mstDevice.getGraphicBoard());
         target.setRemarks(mstDevice.getRemarks());
+        target.setInventoryDate(mstDevice.getInventoryDate());
         target.setUpdateDate(LocalDateTime.now());
 
         return mstDeviceRepository.save(target);

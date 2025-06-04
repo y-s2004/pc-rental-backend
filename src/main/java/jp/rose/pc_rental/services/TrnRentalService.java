@@ -24,13 +24,19 @@ public class TrnRentalService {
     }
 
     public String rental(TrnRental trnRental) {
+        Optional<TrnRental> existingRental = trnRentalRepository.findByAssetNumAndUserNo(trnRental.getAssetNum(), trnRental.getUserNo());
+
+        if (existingRental.isPresent()) {
+            TrnRental existing = existingRental.get();
+            existing.setRentalStatus(true);
+            existing.setDeleteFlag(false);
+            existing.setRentalsDate(LocalDateTime.now());
+            trnRentalRepository.save(existing);
+            return "貸出が更新されました";
+        }
 
         if (trnRentalRepository.existsByAssetNumAndRentalStatus(trnRental.getAssetNum(), true)) {
             return "既に貸出中のPCです";
-        }
-
-        if (trnRentalRepository.existsByAssetNumAndDeleteFlag(trnRental.getAssetNum(), true)) {
-            return "故障中で貸出できません";
         }
 
         Optional<MstDevice> deviceOpt = mstDeviceRepository.findByAssetNum(trnRental.getAssetNum());
@@ -39,8 +45,7 @@ public class TrnRentalService {
         }
 
         MstDevice device = deviceOpt.get();
-
-        device.setDeleteFlag(true);
+        device.setRentalStatus(true);
         mstDeviceRepository.save(device);
 
         trnRental.setRentalsDate(LocalDateTime.now());
@@ -51,11 +56,11 @@ public class TrnRentalService {
         return "貸出が完了しました";
     }
 
-    public String returnRental(String assetNum) {
-        Optional<TrnRental> optionalRental = trnRentalRepository.findByAssetNum(assetNum);
+    public String returnRental(String assetNum, String userNo) {
+        Optional<TrnRental> optionalRental = trnRentalRepository.findByAssetNumAndUserNo(assetNum, userNo);
 
         if (!optionalRental.isPresent()) {
-            return "そのようなPCは存在しません";
+            return "そのような貸出記録は存在しません";
         }
 
         TrnRental trnRental = optionalRental.get();
@@ -64,13 +69,16 @@ public class TrnRentalService {
             return "既に返却されています";
         }
 
-        if (trnRentalRepository.existsByAssetNumAndDeleteFlag(assetNum, true)) {
-            return "故障中です";
+        Optional<MstDevice> optionalDevice = mstDeviceRepository.findByAssetNum(assetNum);
+        if (optionalDevice.isPresent()) {
+            MstDevice device = optionalDevice.get();
+            device.setRentalStatus(false);
+            mstDeviceRepository.save(device);
         }
 
         trnRental.setRentalStatus(false);
+        trnRental.setDeleteFlag(true);
         trnRental.setReturnDate(LocalDateTime.now());
-
         trnRentalRepository.save(trnRental);
 
         return "返却が完了しました";
@@ -84,7 +92,6 @@ public class TrnRentalService {
         target.setPlace(trnRental.getPlace());
         target.setName(trnRental.getName());
         target.setReturnDate(LocalDateTime.now());
-        target.setInventoryDate(LocalDateTime.now());
         target.setRemarks(trnRental.getRemarks());
 
         return trnRentalRepository.save(target);
@@ -94,9 +101,6 @@ public class TrnRentalService {
         return trnRentalRepository.findByRentalStatusTrueAndDeleteFlagFalse();
     }
 
-    public List<TrnRental> getAllRentalDevice(){
-        return trnRentalRepository.findByRentalStatusFalseAndDeleteFlagFalse();
-    }
 
     public TrnRental getDetail(String assetNum){
         return trnRentalRepository.findByAssetNumAndDeleteFlagFalse(assetNum).orElse(null);

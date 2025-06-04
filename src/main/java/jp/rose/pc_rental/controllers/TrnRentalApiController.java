@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/rental")
@@ -31,19 +32,22 @@ public class TrnRentalApiController {
         return ResponseEntity.ok(updated);
     }
 
-    @GetMapping("/rented")
-    public  ResponseEntity<List<TrnRental>> getAllRentalDevice(){
-        List<TrnRental> rented = trnRentalService.getAllRentalDevice();
-        return  ResponseEntity.ok(rented);
-    }
+
 
     @PostMapping("/{asset_num}/return")
-    public ResponseEntity<String> returnRental(@PathVariable("asset_num") String assetNum){
-        String result = trnRentalService.returnRental(assetNum);
+    public ResponseEntity<String> returnRental(
+            @PathVariable("asset_num") String assetNum,
+            @RequestBody Map<String, String> requestBody) {
+        String userNo = requestBody.get("user_no");
+        if (userNo == null || userNo.isEmpty()) {
+            return ResponseEntity.badRequest().body("ユーザ番号が必要です");
+        }
+
+        String result = trnRentalService.returnRental(assetNum, userNo);
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/available")
+    @GetMapping("/rented")
     public ResponseEntity<List<TrnRental>> getAllAvailableDevice(){
         List<TrnRental> availableDevice = trnRentalService.getAllAvailableDevice();
         return ResponseEntity.ok(availableDevice);
