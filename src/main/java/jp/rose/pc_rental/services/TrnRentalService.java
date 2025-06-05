@@ -108,7 +108,7 @@ public class TrnRentalService {
 
     public List<TrnRental> getAllOverDevice(){
         LocalDateTime today = LocalDateTime.now();
-        return trnRentalRepository.findByReturnDateBeforeAndRentalStatus(today, false);
+        return trnRentalRepository.findByReturnDateBeforeAndRentalStatus(today, true);
     }
 
     public List<TrnRental> searchRental(String assetNum){

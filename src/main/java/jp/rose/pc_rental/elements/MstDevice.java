@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -67,6 +68,6 @@ public class MstDevice {
     private boolean rentalStatus;
 
     @JsonProperty("inventory_date")
-    private LocalDateTime inventoryDate;
+    private LocalDate inventoryDate;
 
 }
