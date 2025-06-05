@@ -58,7 +58,7 @@ public class MstUser {
     @JsonProperty("delete_flag")
     private boolean deleteFlag;
 
-    @Column(nullable = false, length = 10)
+    @Column(length = 10)
     private String password;
 
 }
