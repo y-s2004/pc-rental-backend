@@ -1,6 +1,6 @@
 package jp.rose.pc_rental.services;
 
-import jp.rose.pc_rental.elements.MstDevice;
+import jp.rose.pc_rental.entity.MstDevice;
 import jp.rose.pc_rental.repositories.MstDeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

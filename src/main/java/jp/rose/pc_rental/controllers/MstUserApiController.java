@@ -1,6 +1,6 @@
 package jp.rose.pc_rental.controllers;
 
-import jp.rose.pc_rental.elements.MstUser;
+import jp.rose.pc_rental.entity.MstUser;
 import jp.rose.pc_rental.services.MstUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

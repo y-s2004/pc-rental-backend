@@ -1,6 +1,6 @@
 package jp.rose.pc_rental.controllers;
 
-import jp.rose.pc_rental.elements.TrnRental;
+import jp.rose.pc_rental.entity.TrnRental;
 import jp.rose.pc_rental.services.TrnRentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

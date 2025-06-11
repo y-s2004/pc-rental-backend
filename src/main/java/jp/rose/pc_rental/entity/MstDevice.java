@@ -1,4 +1,4 @@
-package jp.rose.pc_rental.elements;
+package jp.rose.pc_rental.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

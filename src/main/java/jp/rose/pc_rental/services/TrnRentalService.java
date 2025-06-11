@@ -1,7 +1,7 @@
 package jp.rose.pc_rental.services;
 
-import jp.rose.pc_rental.elements.MstDevice;
-import jp.rose.pc_rental.elements.TrnRental;
+import jp.rose.pc_rental.entity.MstDevice;
+import jp.rose.pc_rental.entity.TrnRental;
 import jp.rose.pc_rental.repositories.MstDeviceRepository;
 import jp.rose.pc_rental.repositories.TrnRentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;

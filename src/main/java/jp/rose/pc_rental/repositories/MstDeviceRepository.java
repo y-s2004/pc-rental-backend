@@ -1,6 +1,6 @@
 package jp.rose.pc_rental.repositories;
 
-import jp.rose.pc_rental.elements.MstDevice;
+import jp.rose.pc_rental.entity.MstDevice;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
