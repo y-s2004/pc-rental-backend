@@ -20,7 +20,7 @@ public class LoginApiController {
     private MstUserService mstUserService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Map<String, String> loginData, HttpSession session) {
+    public ResponseEntity<?> login(@RequestBody Map<String, String> loginData, HttpSession session) {
         System.out.println("ログインリクエスト受信");
 
         String employeeNo = loginData.get("employee_no");
@@ -55,6 +55,14 @@ public class LoginApiController {
         }
 
         session.setAttribute("LOGIN_USER", user);
-        return ResponseEntity.ok("ログイン完了");
+
+        Map<String, Object> response = new java.util.HashMap<>();
+        response.put("message", "ログイン完了");
+        Map<String, Object> userInfo = new java.util.HashMap<>();
+        userInfo.put("authority", user.getAccountLevel());
+        userInfo.put("name", user.getName());
+        response.put("user", userInfo);
+
+        return ResponseEntity.ok(response);
     }
 }
