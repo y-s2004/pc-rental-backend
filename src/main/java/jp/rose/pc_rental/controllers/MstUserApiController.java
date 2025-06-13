@@ -56,6 +56,4 @@ public class MstUserApiController {
         return ResponseEntity.ok(result);
     }
 
-
-
 }

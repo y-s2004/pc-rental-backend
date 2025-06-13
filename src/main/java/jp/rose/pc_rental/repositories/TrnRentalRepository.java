@@ -11,10 +11,9 @@ public interface TrnRentalRepository extends JpaRepository<TrnRental, String> {
 
     Optional<TrnRental> findByAssetNumAndDeleteFlagFalse(String assetNum);
     boolean existsByAssetNumAndRentalStatus(String assetNum, boolean rentalStatus);
-    Optional<TrnRental>findByAssetNumAndUserNo(String asset_num, String UserNo);
+    Optional<TrnRental>findByAssetNumAndUserNo(String assetNum, String UserNo);
     List<TrnRental> findByRentalStatusTrueAndDeleteFlagFalse();
     List<TrnRental> findByReturnDateBeforeAndRentalStatus(LocalDateTime returnDate, boolean rentalStatus);
     List<TrnRental> findByAssetNumContainingAndDeleteFlagFalse(String assetNum);
-
 
 }
