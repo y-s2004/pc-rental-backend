@@ -32,8 +32,6 @@ public class TrnRentalApiController {
         return ResponseEntity.ok(updated);
     }
 
-
-
     @PostMapping("/{asset_num}/return")
     public ResponseEntity<String> returnRental(
             @PathVariable("asset_num") String assetNum,

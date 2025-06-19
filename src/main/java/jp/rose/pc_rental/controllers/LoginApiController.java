@@ -42,7 +42,6 @@ public class LoginApiController {
         System.out.println("DBのパスワード: [" + user.getPassword() + "]");
         System.out.println("送信されたパスワード: [" + password + "]");
 
-
         if(user.isDeleteFlag() || user.getRetireDate() != null){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("ログイン情報が存在しません");
         }

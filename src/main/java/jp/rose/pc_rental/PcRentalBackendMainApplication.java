@@ -8,8 +8,6 @@ public class PcRentalBackendMainApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PcRentalBackendMainApplication.class, args);
-
-
 	}
 
 }
