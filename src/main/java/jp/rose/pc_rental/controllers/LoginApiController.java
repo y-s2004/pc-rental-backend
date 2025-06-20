@@ -46,9 +46,6 @@ public class LoginApiController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("ログイン情報が存在しません");
         }
 
-        System.out.println("DBのパスワード: [" + user.getPassword() + "]");
-        System.out.println("送信されたパスワード: [" + password + "]");
-
         if(!user.getPassword().equals(password)){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("ログイン情報が存在しません");
         }
