@@ -12,5 +12,4 @@ public interface MstDeviceRepository extends JpaRepository<MstDevice, String> {
     Optional<MstDevice>findByAssetNumAndDeleteFlagFalse(String assetNum);
     List<MstDevice> findByBreakdownFalseAndDeleteFlagFalse();
     List<MstDevice> findByAssetNumContainingOrMakerContainingOrOsContainingAndDeleteFlagFalse(String assetNum, String maker, String os);
-
 }

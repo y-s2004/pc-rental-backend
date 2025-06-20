@@ -11,5 +11,4 @@ public interface MstUserRepository extends JpaRepository<MstUser, String> {
     Optional<MstUser> findByEmployeeNoAndDeleteFlagFalse(String employeeNo);
     List<MstUser> findByDeleteFlagFalse();
     List<MstUser> findByEmployeeNoContainingOrNameContainingOrDepartmentContaining(String employeeNo, String name, String department);
-
 }

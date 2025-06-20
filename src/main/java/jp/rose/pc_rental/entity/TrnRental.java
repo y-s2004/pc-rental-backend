@@ -50,6 +50,4 @@ public class TrnRental {
     @Column(nullable = false, columnDefinition = "boolean default false")
     @JsonProperty("delete_flag")
     private Boolean deleteFlag = false;
-
-
 }

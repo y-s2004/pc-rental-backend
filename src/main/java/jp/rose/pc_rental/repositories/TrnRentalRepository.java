@@ -15,5 +15,4 @@ public interface TrnRentalRepository extends JpaRepository<TrnRental, String> {
     List<TrnRental> findByRentalStatusTrueAndDeleteFlagFalse();
     List<TrnRental> findByReturnDateBeforeAndRentalStatus(LocalDateTime returnDate, boolean rentalStatus);
     List<TrnRental> findByAssetNumContainingAndDeleteFlagFalse(String assetNum);
-
 }

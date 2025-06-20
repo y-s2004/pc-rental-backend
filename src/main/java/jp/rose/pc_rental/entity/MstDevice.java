@@ -69,5 +69,4 @@ public class MstDevice {
 
     @JsonProperty("inventory_date")
     private LocalDate inventoryDate;
-
 }

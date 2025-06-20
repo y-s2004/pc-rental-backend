@@ -1,6 +1,5 @@
 package jp.rose.pc_rental.controllers;
 
-
 import jp.rose.pc_rental.entity.MstDevice;
 import jp.rose.pc_rental.services.MstDeviceService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -33,9 +33,7 @@ public class TrnRentalApiController {
     }
 
     @PostMapping("/{asset_num}/return")
-    public ResponseEntity<String> returnRental(
-            @PathVariable("asset_num") String assetNum,
-            @RequestBody Map<String, String> requestBody) {
+    public ResponseEntity<String> returnRental(@PathVariable("asset_num") String assetNum, @RequestBody Map<String, String> requestBody) {
         String userNo = requestBody.get("user_no");
         if (userNo == null || userNo.isEmpty()) {
             return ResponseEntity.badRequest().body("ユーザ番号が必要です");

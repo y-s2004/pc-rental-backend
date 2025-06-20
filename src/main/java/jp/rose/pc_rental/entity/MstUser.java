@@ -60,5 +60,4 @@ public class MstUser {
 
     @Column(length = 10)
     private String password;
-
 }
