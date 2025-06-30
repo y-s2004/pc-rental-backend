@@ -49,6 +49,7 @@ public class LoginApiController {
         if(!user.getPassword().equals(password)){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("ログイン情報が存在しません");
         }
+        
 
         session.setAttribute("LOGIN_USER", user);
 
