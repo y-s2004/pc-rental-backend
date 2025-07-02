@@ -27,7 +27,7 @@ public class MstDeviceService {
         MstDevice target = mstDeviceRepository.findByAssetNum(assetNum)
                 .orElseThrow(() -> new IllegalArgumentException("User not found: "+ assetNum));
         target.setDeleteFlag(true);
-        mstDeviceRepository.deleteById(assetNum);
+        mstDeviceRepository.save(target);
     }
 
     public MstDevice updateDevice(String assetNum, MstDevice mstDevice){
