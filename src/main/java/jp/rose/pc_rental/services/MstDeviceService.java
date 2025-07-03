@@ -18,7 +18,6 @@ public class MstDeviceService {
         this.mstDeviceRepository = mstDeviceRepository;
     }
 
-
     public MstDevice createMstDevice(MstDevice mstDevice){
         mstDevice.setRegistrationDate(LocalDateTime.now());
         return mstDeviceRepository.save(mstDevice);
