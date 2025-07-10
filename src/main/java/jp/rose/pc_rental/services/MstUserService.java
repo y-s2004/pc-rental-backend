@@ -54,6 +54,11 @@ public class MstUserService {
         target.setRetireDate(mstUser.getRetireDate());
         target.setUpdateDate(LocalDateTime.now());
 
+        if (mstUser.getPassword() != null && !mstUser.getPassword().isEmpty()){
+            target.setPassword(mstUser.getPassword());
+        }
+
+        System.out.println("受信2");
         return mstUserRepository.save(target);
     }
 

@@ -33,6 +33,7 @@ public class MstUserApiController {
 
     @PutMapping("/{employee_no}")
     public ResponseEntity<MstUser> updateUser(@PathVariable("employee_no") String employeeNo, @RequestBody MstUser req){
+        System.out.println("受信2: " + employeeNo);
         MstUser updated = mstUserService.updateUser(employeeNo, req);
         return ResponseEntity.ok(updated);
     }
